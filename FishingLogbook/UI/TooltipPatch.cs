@@ -9,7 +9,7 @@ namespace FishingLogbook.UI
 {
     public class TooltipPatch
     {
-        public static void OnTooltipDisplay(Bookcase.Events.TooltipEvent e, FishingLog fishingLog)
+        public static void OnTooltipDisplay(Bookcase.Events.ItemTooltipEvent e, FishingLog fishingLog)
         {
             if (e.Item.Category == StardewValley.Object.FishCategory)
             {

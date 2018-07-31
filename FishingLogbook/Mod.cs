@@ -18,13 +18,13 @@ namespace FishingLogbook
         {
             SaveEvents.AfterLoad += LoadFishingLog;
             SaveEvents.AfterSave += SaveFishingLog;
-            BookcaseEvents.OnTooltip.Add((e) => TooltipPatch.OnTooltipDisplay(e, FishingLog), EventBus<TooltipEvent>.Priority.Low);
-            BookcaseEvents.AfterFishCaught.Add((e) =>
+            BookcaseEvents.OnItemTooltip.Add((e) => TooltipPatch.OnTooltipDisplay(e, FishingLog), EventBus<ItemTooltipEvent>.Priority.Low);
+            BookcaseEvents.FishCaughtInfo.Add((e) =>
             {
-                if (e.fishSize == -1)
+                if (e.FishSize == -1)
                     return;
-                Monitor.Log($"Fish caught {e.fishID} :: {e.fishSize}");
-                FishingLog.RecordCatch(e.fishID, e.fishSize, e.fishQuality);
+                Monitor.Log($"Fish caught {e.FishID} :: {e.FishSize}");
+                FishingLog.RecordCatch(e.FishID, e.FishSize, e.FishQuality);
                 SaveFishingLog(null, null);
             });
         }
