@@ -1,0 +1,10 @@
+{
+  "Name": "Fishing Log",
+  "Author": "M3ales",
+  "Version": "0.1.0",
+  "Description": "",
+  "UniqueID": "FishingLog",
+  "EntryDll": "FishingLog.dll",
+  "MinimumApiVersion": "2.0",
+  "UpdateKeys": [ "GitHub:M3ales/FishingLog" ]
+}
