@@ -7,8 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FishingLogbook.Tracker;
+using FishingLogbook.UI;
 
-namespace FishingLog
+namespace FishingLogbook
 {
     public class ModEntry : Mod
     {
@@ -16,6 +18,7 @@ namespace FishingLog
         {
             SaveEvents.AfterLoad += LoadFishingLog;
             SaveEvents.AfterSave += SaveFishingLog;
+            BookcaseEvents.OnTooltip.Add((e) => TooltipPatch.OnTooltipDisplay(e, FishingLog), EventBus<TooltipEvent>.Priority.Low);
             BookcaseEvents.AfterFishCaught.Add((e) =>
             {
                 if (e.fishSize == -1)
@@ -24,35 +27,6 @@ namespace FishingLog
                 FishingLog.RecordCatch(e.fishID, e.fishSize, e.fishQuality);
                 SaveFishingLog(null, null);
             });
-            BookcaseEvents.OnTooltip.Add(OnTooltip, EventBus<TooltipEvent>.Priority.Low);
-        }
-        private void OnTooltip(TooltipEvent e)
-        {
-            if(e.Item.Category == StardewValley.Object.FishCategory)
-            {
-                AggregateCatchConditions conditions = FishingLog.Conditions.FirstOrDefault(c => c.ObjectID == e.Item.ParentSheetIndex);
-                if (conditions != null)
-                {
-                    e.AddLine("Conditions: ");
-                    if(conditions.Rain && !conditions.NoRain)
-                        e.AddLine("-Rain");
-                    else if (conditions.Rain && conditions.NoRain)
-                        e.AddLine("-Any Weather");
-                    else if(!conditions.Rain && conditions.NoRain)
-                        e.AddLine("-Sunshine");
-                    if (conditions.Day && conditions.Night)
-                        e.AddLine("-Any Time");
-                    else if (conditions.Day && !conditions.Night)
-                        e.AddLine("-Daytime");
-                    else
-                        e.AddLine("-Nighttime");
-                    e.AddLine("-" + conditions.Seasons.Select(c=>c.Substring(0,1).ToUpper() + c.Substring(1)).Aggregate((c, x) =>  c + "\n-" + x));
-                    e.AddLine("Found at: ");
-                    e.AddLine("-" + conditions.Locations.Aggregate((c, x) => c + "\n-" + x));
-                }
-                else
-                    e.AddLine("Nothing in the fishing logbook.");
-            }
         }
         public FishingLog FishingLog
         {

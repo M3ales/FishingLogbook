@@ -7,8 +7,8 @@
     <ProjectGuid>{6C1E6B9F-F3C4-46FE-9730-80FCF1CB6F56}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FishingLog</RootNamespace>
-    <AssemblyName>FishingLog</AssemblyName>
+    <RootNamespace>FishingLogbook</RootNamespace>
+    <AssemblyName>FishingLogbook</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -51,12 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateCatchConditions.cs" />
-    <Compile Include="CatchConditions.cs" />
-    <Compile Include="CaughtFish.cs" />
-    <Compile Include="FishingLog.cs" />
+    <Compile Include="Tracker\AggregateCatchConditions.cs" />
+    <Compile Include="Tracker\CatchConditions.cs" />
+    <Compile Include="Tracker\CaughtFish.cs" />
+    <Compile Include="Tracker\FishingLog.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\TooltipPatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

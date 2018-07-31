@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FishingLog
+namespace FishingLogbook.Tracker
 {
     public class CaughtFish
     {

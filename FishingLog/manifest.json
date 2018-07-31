@@ -1,10 +1,10 @@
 {
-  "Name": "Fishing Log",
+  "Name": "Fishing Logbook",
   "Author": "M3ales",
-  "Version": "0.1.0",
-  "Description": "",
-  "UniqueID": "FishingLog",
-  "EntryDll": "FishingLog.dll",
+  "Version": "0.2.0",
+  "Description": "Tracks your fishing, and provides tooltips to aid in finding fish again.",
+  "UniqueID": "FishingLogbook",
+  "EntryDll": "FishingLogbook.dll",
   "MinimumApiVersion": "2.0",
-  "UpdateKeys": [ "GitHub:M3ales/FishingLog" ]
+  "UpdateKeys": [ "GitHub:M3ales/FishingLogbook" ]
 }
