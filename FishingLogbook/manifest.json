@@ -5,6 +5,6 @@
   "Description": "Tracks your fishing, and provides tooltips to aid in finding fish again.",
   "UniqueID": "FishingLogbook",
   "EntryDll": "FishingLogbook.dll",
-  "MinimumApiVersion": "2.0",
+  "MinimumApiVersion": "2.8",
   "UpdateKeys": [ "GitHub:M3ales/FishingLogbook" ]
 }

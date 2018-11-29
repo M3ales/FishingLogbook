@@ -48,6 +48,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>G:\SteamLibrary\steamapps\common\Stardew Valley\StardewModdingAPI.exe</HintPath>
     </Reference>
+    <Reference Include="StardewModdingAPI.Toolkit.CoreInterfaces">
+      <HintPath>..\..\RelationshipTooltips\packages\Pathoschild.Stardew.ModBuildConfig.2.1.0-beta-20180630\build\StardewModdingAPI.Toolkit.CoreInterfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
