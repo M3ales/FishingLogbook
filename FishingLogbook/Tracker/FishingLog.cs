@@ -41,9 +41,9 @@ namespace FishingLogbook.Tracker
                 if (item.Category == StardewValley.Object.FishCategory)
                 {
                     AggregateCatchConditions conditions = Conditions.FirstOrDefault(c => c.ObjectID == item.ParentSheetIndex);
-                    str += "Fishing Logbook: ";
                     if (conditions != null)
                     {
+                        str += "When: ";
                         if (conditions.Rain && !conditions.NoRain)
                             str += "\r\n" + "-Rain";
                         else if (conditions.Rain && conditions.NoRain)
@@ -57,11 +57,11 @@ namespace FishingLogbook.Tracker
                         else
                             str += "\r\n" + "-Nighttime";
                         str += "\r\n" + "-" + conditions.Seasons.Select(c => c.Substring(0, 1).ToUpper() + c.Substring(1)).Aggregate((c, x) => c + "\n-" + x);
-                        str += "\r\n" + "Found at: ";
+                        str += "\r\n" + "Where: ";
                         str += "\r\n" + "-" + conditions.Locations.Aggregate((c, x) => c + "\r\n" + "-" + x);
                     }
                     else
-                        str += "\r\nNothing Recorded.";
+                        str += "Nothing Recorded in Fishing Logbook.";
                 }
             return str;
         }
