@@ -11,28 +11,6 @@ namespace FishingLogbook.Tracker
 {
     public class CaughtFish
     {
-        public CaughtFish(int objectID, int fishQuality, int timeOfDay, int size, SDate dateCaught, string location, bool raining)
-        {
-            ObjectID = objectID;
-            FishQuality = fishQuality;
-            TimeOfDay = timeOfDay;
-            Size = size;
-            DateCaught = dateCaught;
-            Conditions = new CatchConditions(DateCaught.Season, raining, WasDayTime(TimeOfDay, DateCaught.Season), location);
-        }
-
-        private static bool WasDayTime(int time, string currentSeason)
-        {
-            return time < GetNightTime(currentSeason);
-        }
-        private static int GetNightTime(string currentSeason)
-        {
-            if (currentSeason == "spring" || currentSeason == "summer")
-                return 1800 + 200;
-            if (currentSeason == "fall")
-                return 1700 + 200;
-            return currentSeason == "winter" ? 1600 + 200 : 1800 + 200;
-        }
         [JsonProperty("id", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public int ObjectID
         {
@@ -88,6 +66,27 @@ namespace FishingLogbook.Tracker
                 }
                 return "null";
             }
+        }
+        private static int GetNightTime(string currentSeason)
+        {
+            if (currentSeason == "spring" || currentSeason == "summer")
+                return 1800 + 200;
+            if (currentSeason == "fall")
+                return 1700 + 200;
+            return currentSeason == "winter" ? 1600 + 200 : 1800 + 200;
+        }
+        private static bool WasDayTime(int time, string currentSeason)
+        {
+            return time < GetNightTime(currentSeason);
+        }
+        public CaughtFish(int objectID, int fishQuality, int timeOfDay, int size, SDate dateCaught, string location, bool raining)
+        {
+            ObjectID = objectID;
+            FishQuality = fishQuality;
+            TimeOfDay = timeOfDay;
+            Size = size;
+            DateCaught = dateCaught;
+            Conditions = new CatchConditions(DateCaught.Season, raining, WasDayTime(TimeOfDay, DateCaught.Season), location);
         }
     }
 }

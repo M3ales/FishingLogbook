@@ -9,6 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using FishingLogbook.Tracker;
 using FishingLogbook.UI;
+using StardewValley.Menus;
+using System.IO;
+using RelationshipTooltips.Relationships;
+using StardewValley.Monsters;
+using RelationshipTooltips.API;
 
 namespace FishingLogbook
 {
@@ -18,7 +23,7 @@ namespace FishingLogbook
         {
             SaveEvents.AfterLoad += LoadFishingLog;
             SaveEvents.AfterSave += SaveFishingLog;
-            BookcaseEvents.OnItemTooltip.Add((e) => TooltipPatch.OnTooltipDisplay(e, FishingLog), EventBus<ItemTooltipEvent>.Priority.Low);
+            BookcaseEvents.OnItemTooltip.Add((e) => TooltipPatch.OnTooltipDisplay(e, FishingLog), Priority.Low);
             BookcaseEvents.FishCaughtInfo.Add((e) =>
             {
                 if (e.FishSize == -1)
@@ -27,7 +32,41 @@ namespace FishingLogbook
                 FishingLog.RecordCatch(e.FishID, e.FishSize, e.FishQuality);
                 SaveFishingLog(null, null);
             });
+            BookcaseEvents.PostBundleSpecificPageSetup.Add((e) =>
+            {
+                foreach (var ingredient in e.ingredientList)
+                {
+                    if (ingredient != null && ingredient.item.Category == StardewValley.Object.FishCategory)
+                        ingredient.hoverText += $"\r\n{FishingLog.GetCatchConditionsAsString(ingredient.item)}";
+                }
+            });
+            BookcaseEvents.CollectionsPageDrawEvent.Add((e) =>
+            {
+                if (e.currentTab == CollectionsPage.fishTab && e.hoverText != "")
+                {
+                    Item i = null;
+                    foreach (ClickableTextureComponent c in e.collections[e.currentTab][e.currentPage])
+                    {
+                        if (int.TryParse(c.name.Split(' ')[0], out int index))
+                        {
+                            string name = e.hoverText.Split('\r')[0];
+                            if ((Game1.objectInformation[index].Split('/')[0].Equals(name, StringComparison.CurrentCultureIgnoreCase)))
+                            {
+                                i = new StardewValley.Object(index, 1, false, 0, 0);
+                                break;
+                            }
+                        }
+                    }
+                    if (i != null)
+                    {
+                        string result = FishingLog.GetCatchConditionsAsString(i);
+                        if (!e.hoverText.Contains(result))
+                            e.hoverText += "\r\n\r\n" + result;
+                    }
+                }
+            });
         }
+
         public FishingLog FishingLog
         {
             get;
@@ -63,7 +102,8 @@ namespace FishingLogbook
         }
         private string SaveInfoPath(string name)
         {
-            return $"{Constants.CurrentSavePath}\\{Constants.SaveFolderName}_{ModManifest.UniqueID}_{name}.json";
+            return $"{Constants.CurrentSavePath}{Path.DirectorySeparatorChar}{Constants.SaveFolderName}_{ModManifest.UniqueID}_{name}.json";
         }
+
     }
 }

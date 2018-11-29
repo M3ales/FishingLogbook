@@ -1,7 +1,7 @@
 {
   "Name": "Fishing Logbook",
   "Author": "M3ales",
-  "Version": "0.2.0",
+  "Version": "0.3.0",
   "Description": "Tracks your fishing, and provides tooltips to aid in finding fish again.",
   "UniqueID": "FishingLogbook",
   "EntryDll": "FishingLogbook.dll",
