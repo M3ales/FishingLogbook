@@ -11,9 +11,7 @@ using FishingLogbook.Tracker;
 using FishingLogbook.UI;
 using StardewValley.Menus;
 using System.IO;
-using RelationshipTooltips.Relationships;
 using StardewValley.Monsters;
-using RelationshipTooltips.API;
 
 namespace FishingLogbook
 {

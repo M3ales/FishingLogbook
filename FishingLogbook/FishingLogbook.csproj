@@ -40,10 +40,6 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="RelationshipTooltips">
-      <HintPath>G:\SteamLibrary\steamapps\common\Stardew Valley\Mods\RelationshipTooltips\RelationshipTooltips.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Stardew Valley, Version=1.3.6794.32951, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>G:\SteamLibrary\steamapps\common\Stardew Valley\Stardew Valley.exe</HintPath>
